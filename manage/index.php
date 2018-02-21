@@ -30,9 +30,20 @@ if($_POST) {
             unlink($target_path);
         }
 
+        $folderName = preg_replace('/\\.[^.\\s]{3,4}$/', '', $filename);
         $copy_path = preg_replace('/\\.[^.\\s]{3,4}$/', '', $target_path)."/vendor";
-        echo $copy_path;
-        recurse_copy('../vendor', $copy_path);
+
+        //recurse_copy('../vendor', $copy_path);
+
+        /////
+        $fileName = "../site/.htaccess";
+
+        $stringContent = "
+        RewriteEngine On \n
+        RewriteRule ^{$folderName}/public/(.*)$ /$1 [R=301,NC,L] \n";
+
+        file_put_contents($fileName, $stringContent);
+        /////
 
         $message = "Your .zip file was uploaded, unpacked and copied vendor.";
 

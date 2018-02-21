@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule ^language-system-test/public/(.*)$ /$1 [R=301,NC,L]
+#RewriteRule ^$ language-system-test/public [L]

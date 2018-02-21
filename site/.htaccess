@@ -1,0 +1,4 @@
+
+        RewriteEngine On 
+
+        RewriteRule ^language-system-test-daha/public/(.*)$ /$1 [R=301,NC,L] 
