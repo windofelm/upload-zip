@@ -19,18 +19,20 @@ if($_POST) {
         $message = "The file you are trying to upload is not a .zip file. Please try again.";
     }
 
-    $target_path = "./".$filename;  // change this to the correct site path
+    $target_path = "../site/".$filename;  // change this to the correct site path
     if(move_uploaded_file($source, $target_path)) {
         $zip = new ZipArchive();
         $x = $zip->open($target_path);
         if ($x === true) {
-            $zip->extractTo("./"); // change this to the correct site path
+            $zip->extractTo("../site"); // change this to the correct site path
             $zip->close();
 
             unlink($target_path);
         }
 
-        recurse_copy('./vendor', preg_replace('/\\.[^.\\s]{3,4}$/', '', $target_path)."/vendor");
+        $copy_path = preg_replace('/\\.[^.\\s]{3,4}$/', '', $target_path)."/vendor";
+        echo $copy_path;
+        recurse_copy('../vendor', $copy_path);
 
         $message = "Your .zip file was uploaded, unpacked and copied vendor.";
 
