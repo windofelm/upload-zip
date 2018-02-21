@@ -24,7 +24,7 @@ if($_POST) {
         $zip = new ZipArchive();
         $x = $zip->open($target_path);
         if ($x === true) {
-            $zip->extractTo("../site"); // change this to the correct site path
+            $zip->extractTo("../site/"); // change this to the correct site path
             $zip->close();
 
             unlink($target_path);
@@ -33,7 +33,7 @@ if($_POST) {
         $folderName = preg_replace('/\\.[^.\\s]{3,4}$/', '', $filename);
         $copy_path = preg_replace('/\\.[^.\\s]{3,4}$/', '', $target_path)."/vendor";
 
-        //recurse_copy('../vendor', $copy_path);
+        recurse_copy('../vendor', $copy_path);
 
         /////
         $fileName = "../site/.htaccess";
